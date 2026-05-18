@@ -58,11 +58,25 @@ button { cursor: pointer; }
   padding: 0 2.5rem;
   background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--line);
   font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);
+  overflow: hidden; transition: height 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
 }
+#admin-bar.collapsed { height: 0; opacity: 0; border-bottom-color: transparent; }
 #admin-bar a { color: var(--fg); text-decoration: none; letter-spacing: 0.1em; font-size: 9px; }
 #admin-bar a:hover { opacity: 0.7; }
+#admin-bar-btn { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); cursor: pointer; padding: 3px 8px; border: 1px solid var(--line); border-radius: 10px; background: none; font-family: inherit; transition: color 0.15s, border-color 0.15s; }
+#admin-bar-btn:hover { color: var(--fg); border-color: var(--fg); }
+#admin-tab {
+  display: none; position: fixed; top: 10px; right: 2.5rem; z-index: 300;
+  align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 20px;
+  padding: 4px 10px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);
+  cursor: pointer; font-family: inherit; transition: color 0.15s, border-color 0.15s;
+}
+#admin-tab:hover { color: var(--fg); border-color: rgba(255,255,255,0.2); }
 body.admin-visible .nav { top: 36px; }
 body.admin-visible .page { padding-top: calc(var(--nav-h, 72px) + 36px); }
+body.admin-collapsed .nav { top: 0; }
+body.admin-collapsed #admin-tab { display: flex; }
 
 /* ── Nav ─────────────────────────────────────────────────── */
 .nav {
@@ -290,8 +304,12 @@ footer {
 <!-- Admin bar -->
 <div id="admin-bar">
   <span>Admin Mode</span>
-  <a href="https://app.yprint.de/admin/ec">EC Admin →</a>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a href="https://app.yprint.de/admin/ec">EC Admin →</a>
+    <button id="admin-bar-btn" onclick="toggleAdminBar()">▲ hide</button>
+  </div>
 </div>
+<button id="admin-tab" onclick="toggleAdminBar()">◈ admin</button>
 
 <!-- Auth guard (shown before JWT is verified) -->
 <div id="auth-guard" class="on">
@@ -410,12 +428,29 @@ async function init() {
   document.getElementById('page-footer').style.display = '';
   document.getElementById('nav-user').textContent = currentUser.name || currentUser.email;
 
-  if (data.is_admin) {
-    document.getElementById('admin-bar').style.display = 'flex';
-    document.body.classList.add('admin-visible');
-  }
+  if (data.is_admin) showAdminBar();
 
   loadProducts();
+}
+
+function showAdminBar() {
+  const bar = document.getElementById('admin-bar');
+  bar.style.display = 'flex';
+  const collapsed = sessionStorage.getItem('adminBarCollapsed') === '1';
+  if (collapsed) {
+    bar.classList.add('collapsed');
+    document.body.classList.add('admin-collapsed');
+  } else {
+    document.body.classList.add('admin-visible');
+  }
+}
+
+function toggleAdminBar() {
+  const bar = document.getElementById('admin-bar');
+  const isCollapsed = bar.classList.toggle('collapsed');
+  document.body.classList.toggle('admin-visible', !isCollapsed);
+  document.body.classList.toggle('admin-collapsed', isCollapsed);
+  sessionStorage.setItem('adminBarCollapsed', isCollapsed ? '1' : '0');
 }
 
 function showGuard() {
