@@ -154,21 +154,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px; line-height: 1.75; color: var(--dim);
 }
 
-/* ── WAITLIST ─────────────────────────────────────────────── */
-.waitlist {
-  padding: 6rem 1.5rem;
-  border-top: 1px solid var(--line);
-  max-width: 560px;
-}
-.waitlist-eyebrow {
-  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--dim); font-weight: 400; margin-bottom: 2rem;
-}
-.waitlist-headline {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92;
-  margin-bottom: 2.5rem;
-}
+/* ── WAITLIST FORM FIELDS ─────────────────────────────────── */
 .wl-field {
   border-bottom: 1px solid var(--line); margin-bottom: 1.25rem; position: relative;
 }
@@ -234,6 +220,42 @@ footer {
   transition: color var(--dur-sm), border-color var(--dur-sm);
 }
 .footer-link:hover { color: var(--fg); border-color: rgba(240,240,240,0.3); }
+
+/* ── WAITLIST MODAL ──────────────────────────────────────── */
+#waitlist-gate {
+  position: fixed; inset: 0; z-index: 500;
+  background: var(--bg);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-md) var(--ease-out-expo);
+  overflow-y: auto; overscroll-behavior: contain;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+}
+#waitlist-gate.on { opacity: 1; pointer-events: all; }
+.waitlist-box {
+  width: 100%; max-width: 400px;
+  padding: 2.5rem 0;
+}
+.waitlist-modal-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+.waitlist-modal-headline {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92;
+}
+.waitlist-close {
+  position: relative; width: 14px; height: 14px; cursor: pointer; flex-shrink: 0;
+  margin-top: 6px;
+  transition: opacity var(--dur-sm);
+}
+.waitlist-close:hover { opacity: 0.4; }
+.waitlist-close::before, .waitlist-close::after {
+  content: ''; position: absolute; left: 0; top: 50%;
+  width: 100%; height: 1px; background: var(--fg);
+}
+.waitlist-close::before { transform: rotate(45deg); }
+.waitlist-close::after  { transform: rotate(-45deg); }
 
 /* ── LOGIN MODAL ─────────────────────────────────────────── */
 #login-gate {
@@ -325,7 +347,7 @@ footer {
   <svg class="ec-logo" fill="currentColor" role="img" aria-label="Empty Closet"><use href="#ec-logo"/></svg>
   <div class="nav-right">
     <button class="nav-login" onclick="openLogin()">Members Login</button>
-    <a class="nav-waitlist" href="#waitlist">Join Waitlist</a>
+    <button class="nav-waitlist" onclick="openWaitlist()">Join Waitlist</button>
   </div>
 </header>
 
@@ -342,10 +364,11 @@ footer {
     <div class="hero-eyebrow">S/S 26 &nbsp;·&nbsp; Community Access</div>
     <h1 class="hero-headline">The Archive<br>Is Closed.</h1>
     <div class="hero-cta">
-      <a class="hero-btn" href="/join">
+      <button class="hero-btn" onclick="openWaitlist()">
         <span class="hero-btn-dot"></span>
-        Secure Your Preorder
-      </a>
+        Join Waitlist
+      </button>
+      <button class="hero-btn" onclick="openLogin()">Members Login</button>
     </div>
   </div>
 </section>
@@ -372,34 +395,36 @@ footer {
   </div>
 </section>
 
-<!-- Waitlist -->
-<section class="waitlist" id="waitlist">
-  <div class="waitlist-eyebrow">Request Access</div>
-  <h2 class="waitlist-headline">Join<br>The List.</h2>
-
-  <div id="waitlist-form">
-    <div class="wl-field">
-      <input type="text" id="wl-name" placeholder="Name (optional)" autocomplete="name">
-      <div class="wl-underline"></div>
+<!-- Waitlist Modal -->
+<div id="waitlist-gate">
+  <div class="waitlist-box">
+    <div class="waitlist-modal-header">
+      <h2 class="waitlist-modal-headline">Join<br>The List.</h2>
+      <button class="waitlist-close" onclick="closeWaitlist()" aria-label="Close"></button>
     </div>
-    <div class="wl-field">
-      <input type="email" id="wl-email" placeholder="Email" autocomplete="email">
-      <div class="wl-underline"></div>
+    <div id="waitlist-form">
+      <div class="wl-field">
+        <input type="text" id="wl-name" placeholder="Name (optional)" autocomplete="name">
+        <div class="wl-underline"></div>
+      </div>
+      <div class="wl-field">
+        <input type="email" id="wl-email" placeholder="Email" autocomplete="email">
+        <div class="wl-underline"></div>
+      </div>
+      <div class="wl-field">
+        <textarea id="wl-msg" rows="3" placeholder="Why do you want in? (optional)"></textarea>
+        <div class="wl-underline"></div>
+      </div>
+      <div class="wl-error" id="wl-error"></div>
+      <button class="wl-submit" id="wl-submit" onclick="submitWaitlist()">Request Access</button>
+      <div class="wl-alt">Already have a code? <a href="/join">Enter it here →</a></div>
     </div>
-    <div class="wl-field">
-      <textarea id="wl-msg" rows="3" placeholder="Why do you want in? (optional)"></textarea>
-      <div class="wl-underline"></div>
+    <div class="wl-confirm" id="wl-confirm">
+      <strong>You're on the list.</strong><br>
+      We'll reach out when a position opens. Keep an eye on your inbox.
     </div>
-    <div class="wl-error" id="wl-error"></div>
-    <button class="wl-submit" id="wl-submit" onclick="submitWaitlist()">Request Access</button>
-    <div class="wl-alt">Already have a code? <a href="/join">Enter it here →</a></div>
   </div>
-
-  <div class="wl-confirm" id="wl-confirm">
-    <strong>You're on the list.</strong><br>
-    We'll reach out when a position opens. Keep an eye on your inbox.
-  </div>
-</section>
+</div>
 
 <!-- Footer -->
 <footer>
@@ -437,6 +462,21 @@ const EC_API = 'https://app.yprint.de';
   if (t) location.href = '/archive';
 })();
 
+/* ── Waitlist modal ──────────────────────────────────────── */
+function openWaitlist() {
+  document.getElementById('waitlist-gate').classList.add('on');
+  setTimeout(() => document.getElementById('wl-email').focus(), 80);
+}
+function closeWaitlist() {
+  document.getElementById('waitlist-gate').classList.remove('on');
+}
+document.getElementById('waitlist-gate').addEventListener('click', function(e) {
+  if (e.target === this) closeWaitlist();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeWaitlist(); closeLogin(); }
+});
+
 /* ── Login modal ─────────────────────────────────────────── */
 function openLogin() {
   document.getElementById('login-gate').classList.add('on');
@@ -447,9 +487,6 @@ function closeLogin() {
 }
 document.getElementById('login-gate').addEventListener('click', function(e) {
   if (e.target === this) closeLogin();
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLogin();
 });
 document.getElementById('l-password').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();
