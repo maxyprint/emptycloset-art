@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — Empty Closet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- EC Logo symbol — matches index.html exactly -->
+  <svg style="display:none" aria-hidden="true"><defs><symbol id="ec-logo" viewBox="0 0 3170.69 479.11">
+<defs><style>.cls-1{fill:currentColor}</style></defs>
+  <path d="M2228.94,379.71c-27.51,7.79-39.46,13.93-67.31,21.03l-52.5,13.37-61.13,13.83c-7.83,1.77-16.32,2.67-24.09,3.81l-64.51,9.5-33.2,4.4-30,3.56-79.15,5.45-43.96,3.65-18.41,1.91c-25.41,2.64-50.22.29-76.18,1.86l-41.51,2.51-141.5-.13-24.68-2.56c-22.16-2.3-44.34.95-66.03-1.31l-83.32-8.66-52.65-4.73-30.7-2.82-62.03-8.43-54.88-6.39-73.29-11.06c-7.51-1.13-16.39-3.75-23.55-4.17-15.47-.89-28.71-3.39-43.97-6.12l-61.18-10.94-38.74-7.53-48.1-10.07-123.57-26.28-42.06-8.26-122.7-23.49,14.01-14.19c63.61,3.11,164.17-11.82,204.69-62.42,12.05-15.05,12.23-37.79-.24-49.75-17.35-16.65-40.16-20.46-63.62-21.65-42.97-2.18-85.49,10.03-115.29,41.17-16.25,16.98-22.3,24.74-26.59,48.7-.86,4.82,14.8,7.43,18.88,4.69,7.49-5.02,4.78-12.78,20.11-34.06,43.13-59.87,139.34-57.27,137.59-21.03-1.03,21.34-11.51,35.74-28.58,46.94-40,26.25-88.43,35.96-135.96,31.68-1.68-3.65-3.05-8.74-5.41-8.33l-12.13,2.15c-23.12,4.09-65.89-21.62-62.23-46.74,3.77-25.86,23.09-46.72,44.91-58.99,30.16-16.94,62.49-32.15,98.06-32.04,31.12,12.51,75.69,22.4,108.38,8.2,3.05-1.32,7.34-7.04,7.48-10.12.14-3.08-4.32-9.25-7.85-10.68-28.1-11.33-60.26-10.42-90.61-7.36-2.45.25-4.2-8.39-1.76-8.73l75.84-10.73c33.22,16.85,69.62,20.89,106.61,11.66,20.05-5,57.41-22.55,59.61-43.41,1.31-12.38-1.22-23.69-10.74-30.6-24.62-17.86-53.36-22.54-83.17-23.81-46.52-1.98-109.05,5.25-150.69,26.49-23.7,12.09-47.38,27.83-46.22,59.19-42.67-.37-97.54-2.27-131.58-31.62-6.2-5.35-5.7-25.8.7-30.52,39.34-29.06,106.52-22.46,150.25-8.52,5.63,1.79,11.43.34,16.81-5.01-52.44-27.43-133.86-25.25-187.99.31-6.78,3.2-28.73,22.18-18.9,38.8,25.34,42.86,119.27,49.94,164.35,49.88,7.43-.01,15.49,5.01,13.86,11.67-42.4,7.54-83.22,17.69-121.41,36.06-8.48,4.08-16.09,10.07-23.57,15.53-15.74,11.5-40.33,44.3-32.94,61.11,18.55,42.21,59.82,53.27,104.86,59.9-2.53,9.39-10.88,12.02-19.84,10.54l-58.55-9.68c-26.9-4.44-52.64-8.55-80.01-10.57l-69.29-5.14c-19.95-1.48-39.45.1-59.45.51l-51.06,1.04-45.41,3.99-35.03,4.41c-16.31,2.05-40.89,8.31-63.65,16.11,12.81.99,25.46,2.84,37.74,6.21,1.6-.49,3.2-.96,4.79-1.39,22.84-6.05,44.93-10.41,68.01-12.14l44.71-3.34c22.99-1.72,43.39-1.33,66.31-.1l72.33,3.87c34.24,1.83,67.25,5.23,101.65,10.59l22.7,3.54c13.29,2.07,25.39,1.29,38.37,7.67-60.52,35.37-120.13,49.68-185.06,63.2-10.44,2.17-20.81,2.18-32.01,2.86-11.49.7-23.22,2.64-34.73,3.46-.13,5.8.13,11.62.73,17.46l87.53-15.34,32.8-6.67c45.41-9.24,112.95-34.8,151.53-61.57,18.86,1.96,35.94,3.69,54.01,7.53l121.64,25.84,123.18,25.48,28.55,5.71,45.44,8.41,35.44,5.82,48.36,8.42c36.19,6.3,70.07,14.58,106.72,17.02,6.11.41,13.86,1.45,20.34,2.57,66.73,11.59,132.07,20.39,199.5,26.24l68.51,5.94,75.6,5.13,221.36-.24c22.35-.02,43.88-3.82,65.79-5.44l69.57-5.15,105.28-7.96c62.75-4.74,124.07-11.89,184.87-27.6l44.91-11.61c17.28-4.46,83.87-22.89,90.23-35.48,1.03-2.04-6.65-6.6-9.06-5.92Z"/>
+  <path d="M2316.87,186.82c30.3,7.88,16.73,30.88,38.46,36.78,20.02,5.43,43.03,1.18,59.35-13.02l7.76-12.02c26.21-26.91,114.47-22.4,115.23,6.71.48,18.68-34.26,22.23-50.2,12.79,4.32-3.23,11.26-11.58,7.56-16.47-7.39-9.78-26.94-10.49-34.43-2.75-8.34,8.62.4,21.16,7.65,26.67,14.06,10.68,25.8,28.08,14.49,47.05,16.38-5.26,31.27-11.76,46.76-18.58,14.21-6.26,24.2-16.13,36.1-25.45,37.95-29.71,83.97-46.26,131.79-45.92,12.81.09,29.97,4.39,29.86,18.81.36,22.48-103.32,39.34-122.85,42.67-5.01.86-16.16,16.98-9.19,28.71,3.21,5.41,12.67,9.61,21.2,8.3,51.88-7.92,100.87-30,140.09-64.83l18.61-16.53-23.09-6.29c21.61-22.74,24.55,6.47,53.08-20.42l15.28-14.4c14.48-13.65,44.89-12.63,61.83-4.98-14.94,10.47-24.77,16.6-35.98,30.69l51.18.72c2.44.03,7.53,3.16,7.65,5.27s-5.27,5.99-7.87,6.04l-59.12,1.09c-10.37.19-14.75,5.73-21.46,11.82l-17.99,16.33-25.01,22.19c-8.31,7.37-15.56,14.59-20,27.05l6.4,24.32c35.9,20.32,59.51,24.02,100.87,26.89,48.06,3.32,93.46,2.03,140.61-8.23,28.89-6.28,94.24-21.55,114.99-39.23l19.87-16.93c5.19-4.42,10.9-18.23,11.41-24.94.11-1.5-3.94-5.98-4.14-7.47-.2-1.49,1.49-3.35,2.78-5.45-13.92-39.54-65.04-61.27-101.99-77.63-32.55-14.41-64.24-26.99-98.36-37.75-63.88-20.16-216.99-52.98-283.3-62.84l-17.34-2.58-155.02-17.68-80.41-5.58c-69.1-4.79-136.32-5.87-205.32-2.68-41.19,1.9-80.97,1.47-122.06,5.74l-64.2,6.67c-54.56,5.67-107.12,13.84-160.31,26.89-68.33,16.77-90.07,20.85-155.21,48.88-27.77,11.95-68.44,46.04-61.18,13.64,32.49-23.24,69.68-41.73,108.81-52.97l52.75-15.16,31.02-7.58,75.59-15.69c17.06-3.54,32.99-5.91,50.61-8.29l57.32-7.76,38.48-1.85C2112.97,6.84,2168.22-.19,2225.56,0l116.76.4c13.93.05,27.78.82,41.69,2.02l71.17,6.13,32.1,2.22,49.41,3.71,62.7,7,100.26,14.9,74.6,13.77,67.94,14.32c47.41,9.99,92.82,22.97,138.84,39.27l42.22,14.95,27.43,11c21.72,8.71,41.59,18.53,61.74,31,28.8,17.82,43.97,26.57,55.97,61.7,8.25,24.16-6.97,45.93-26.18,60.53-39.37,29.94-97.15,44.23-146.02,51.6l-31.02,4.68c-15.18,2.29-29.42,3.22-45.21,3.58-53.94,1.23-107.21-1.81-157.84-21.05-10.22-3.89-20.36-10.66-29.68-16.24-15.19-9.1-21.28-24.51-16.31-42.13-43.69,22.21-113.85,45.25-156.14,26.24-10.96-4.93-16.44-12.3-18.19-25.7-48.55,23.95-153.53,53.04-194.85,11.07-6.19-6.28-7.61-16.89.13-23.15,7.57-6.12,17.27-9.3,26.93-12.57l-35.83-6.19c-6.95-1.2-12.11,11.5-16.8,15.49-31.21,26.47-69.76,43.48-110.63,46.97-23.92,2.04-63.64-.92-70.25-30.06l-41.39,19.75c-22.94,10.95-68.38,18.47-85.73-5.8,2.75-2.98,4.73-9.91,1.88-12.15-44.63,16.23-145.22,56.61-170.09.78l6.14-16.3c1.73-4.59,8.39-13.13,12.25-16.78,68.61-64.93,183.09-64.51,178.3-32.32-1.96,13.13-35.9,21.85-51.29,10.44l4.97-5.89c1.71-2.03-.64-11.31-3.29-11.34-48.35-.58-109.49,50.36-90.47,78.27,15.48,22.71,116.15-22.9,133.57-36.17,38.04-28.98,72.82-62.23,109.06-94.49l21.13-18.81c37.44-33.32,36.84-49.03,94.71-36.97l-80.13,71.78-47.19,41.25-58,51.21c-9.21,8.13-19.55,16.71-18.28,32.06,26.46-5.38,49.53-16.69,72.29-29.68,31.23-17.83,29.63-35.67,87.09-57.61,32.26-12.31,66.26-18.87,100.84-9.87Z"/>
+  <path d="M1572.85,281.46c-28.56,11.25-51.95,19-77.27,9.48-9.71-3.65-14.92-7.53-15.61-22.02l-28.56,12.33c-30.98,13.38-95.69,29.42-108.5-15.36l9.16-15.15-64.33,15.19c-19.32,4.56-60.27,35.17-109.47,27.87-6.11-.91-13.62-4.61-14.28-9.17-1.03-7.14,2.55-14.07,9.43-16.13,27.26-8.14,52.82-12.23,81.83-12.72l19.46-20.29c9.53-9.94,13.91-24.48,8.47-37.33-31.17.82-58.15,15.74-80.31,35l-46.18,40.15-19.41,17.64-44.79,41.64-24.48,23.13c-8.41,7.95-15.11,19.19-26.43,24.68-5.12,2.48-44.96,3.41-50.29-1.43l46.48-44.03,27.46-24.87c9.76-8.84,19.17-17.53,27.24-27.56-26.59,6.75-44.89,15.71-69.6,12.36-10.76-1.46-30.29-8.1-29.4-21.61.97-14.75,17.1-27.24,28-35.35l28.72-21.36c7.57-5.63,12.78-9.9,20.08-18.96-21.9-11.08-76.24,22.72-96.04,36.31-22.25,15.26-40.63,33.24-59.03,53.11-6.58,7.1-18.96,5.66-27.94,5.38-9.97-.32-18.43,3.37-26.84-5.4l84.18-77.88c2.39-2.21,4.03-10.71,2.01-11.6-1.99-.87-7.44-2.11-9.82-1.41-53.87,15.66-103.33,53.5-141.63,93.86-5.57,3.19-47.61,5.14-53.07-1.57l34.49-31.48,21.35-20.55c14.49-13.95,29.01-27.38,44.14-40.48,19.4-16.79,41.66-12.58,66.5-7.35,25.53-5.27,51.02-11.35,75.9.17l11.01,12.82c29.36-14.68,58.68-23.3,90.09-17.81,10.95,1.91,24.51,8.86,21.73,22.35-2.12,10.26-14.54,19.86-22.97,26.62l-44.47,35.65c-3.04,2.43-6.55,13.07-2.83,13.72,55.24-1.49,137.9-73.7,176.82-109.35l37.71-34.54c9.05-8.29,18.71-8.07,30.17-7.78,9.32.23,15.9.2,27.05,1.24-7.19,10.88-12.65,16.15-21.25,22.74l-17.05,13.06c-6.77,5.19-13.75,11.63-20.44,18.57,25.1-1.64,46.55-7.61,68.81,2.3,7.51,3.34,15.08,11.38,16.12,17.93,1.15,7.25-2.91,18.35-7.37,24.67l-10.75,15.24c15.9,1.68,87.91-30.39,88.25-47.22l-19.98-5.81c17.52-18.78,29.21,3.11,50.98-16.62,27.07-24.53,28.39-34.25,76.36-24.69-10.67,12.73-18.98,18.51-33.13,32.25l51.06,1.11c2.7.06,7.34,2.72,12.08,5.56-21.01,12.29-52.04,2.19-80.35,8.45l-57.14,50.33-12.39,12.49c-3.93,3.96-9.77,13.4-5.37,18.52,9.35,4.22,22.34,2.08,32.55-1.33,49.88-16.64,96.99-49.5,136.24-83.37,11.44-9.87,20.72-12.57,36.3-11.3,8.32.67,17.95-1.17,25.14,3.71l-21.48,19.6-53.53,45.93c-7.86,6.74-14.96,14.58-20.22,23.5,34.82,16.04,128.27-66.17,153.02-88.52,4.64-4.19,12.66-3.78,18.58-3.2,11.4,1.11,21.42-4.08,33.14,3.64l-46.47,41.48-51.53,47.57c36.15-.15,101.66-37.69,128.79-58.99l9.55-7.5c2.73-2.14,13.76.5,13.49,4.08-.52,6.72-7.66,10.9-11.92,14.26-41.29,32.55-83.74,47.8-133.95,61.1l-27.58,7.31c-42.44,38.24-92.08,67.7-148.69,77.89-39.18,7.06-76.91,7.93-114.19-5-18.18-6.31-21.42-14.62-26.98-28.86l7.13-15.24c21.99-14.09,48.56-18.39,72.06-7.78l-27.35,8.62c-7.03,2.21-8.56,12.91-7.73,20.52,1.99,18.21,43.31,22.07,56.89,20.58,40.28-4.41,75.31-22.26,106.83-46.1,17.02-12.87,37.31-22.15,47.5-41.63Z"/>
+  <path d="M228.37,404.46c-7.84,1.97-15.75,3.6-23.84,4.22-14.26,1.09-28.85-1.82-43.05-3.07-23.77-2.1-47.39.25-71.17-.76-11.09-.47-22.38-1.73-32.98-5.18-7.31-2.38-14.91-5.71-18.6-12.93-6.5-12.74,2.46-27.3,10.64-36.84,6.86-8,16.59-16.83,27.18-20.7l-25.28-12.53s-205.26,133.88,205.55,101.9l-28.46-14.11Z"/>
+  <path class="cls-1" d="M246.8,406.08c4.15.04,8.3.11,12.46.22,1.93.05,1.93-2.95,0-3-4.15-.11-8.3-.18-12.46-.22-1.93-.02-1.93,2.98,0,3h0Z"/>
+</symbol></defs></svg>
+
+  <style>
+/* ── Tokens ─────────────────────────────────────────────────────────────── */
+:root {
+  --bg:   #0c0c0c;
+  --fg:   #f0f0f0;
+  --dim:  rgba(240,240,240,0.38);
+  --line: rgba(240,240,240,0.1);
+  --dur-micro: 150ms;
+  --dur-sm: 250ms;
+  --dur-md: 400ms;
+  --dur-lg: 600ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-erd: cubic-bezier(0.57, 0.06, 0.05, 0.95);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+input, button, select, textarea {
+  font-family: inherit; color: inherit; background: none; border: none; outline: none;
+}
+button { cursor: pointer; }
+
+/* ── Nav ─────────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.n-mark { display: flex; align-items: center; gap: 1rem; }
+.ec-logo { height: 16px; width: auto; }
+.ec-logo-sm { height: 11px; }
+.n-label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim); padding-left: 1rem; border-left: 1px solid var(--line);
+}
+.n-right { display: flex; align-items: center; gap: 1.5rem; }
+.n-user { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+.n-logout {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dim); padding: 0.5rem 1rem;
+  border: 1px solid var(--line); border-radius: 20px;
+  transition: border-color var(--dur-sm), color var(--dur-sm);
+}
+.n-logout:hover { border-color: var(--fg); color: var(--fg); }
+
+/* ── Page layout ─────────────────────────────────────────── */
+.page { padding: 7rem 2.5rem 5rem; max-width: 1200px; margin: 0 auto; }
+
+/* ── Page header ─────────────────────────────────────────── */
+.page-header { margin-bottom: 4rem; }
+.page-eyebrow {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 1rem;
+}
+.page-headline {
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: 0.9;
+  letter-spacing: -0.02em; text-transform: uppercase;
+}
+
+/* ── Loading / Empty states ──────────────────────────────── */
+.state-loading, .state-empty {
+  padding: 6rem 0; text-align: center;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
+}
+.spinner {
+  width: 24px; height: 24px; border: 2px solid var(--line);
+  border-top-color: var(--fg); border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin: 0 auto 1.5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Product grid ────────────────────────────────────────── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.product-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  background: rgba(240,240,240,0.03);
+  transition: transform var(--dur-md) var(--ease-erd);
+}
+.product-card:hover { transform: scale(1.01); }
+
+.product-card-img {
+  aspect-ratio: 3/4; overflow: hidden; background: rgba(240,240,240,0.05);
+  display: flex; align-items: center; justify-content: center;
+}
+.product-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-lg) var(--ease-erd);
+  display: block;
+}
+.product-card:hover .product-card-img img { transform: scale(1.04); }
+
+.product-card-img-placeholder {
+  width: 60%; opacity: 0.08;
+  font-size: clamp(4rem, 8vw, 8rem); font-weight: 700; letter-spacing: -0.03em;
+  text-align: center; pointer-events: none; user-select: none;
+}
+
+.product-card-body { padding: 1.5rem 1.25rem 1.25rem; }
+.product-release {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 0.5rem;
+}
+.product-name {
+  font-size: 18px; font-weight: 700; letter-spacing: 0.02em;
+  text-transform: uppercase; margin-bottom: 0.75rem; line-height: 1.1;
+}
+.product-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.product-price {
+  font-size: 14px; letter-spacing: 0.06em; color: var(--dim);
+}
+.product-cta {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.6rem 1.2rem; border: 1px solid rgba(240,240,240,0.18);
+  border-radius: 8px; transition: border-color var(--dur-sm), background var(--dur-sm), color var(--dur-sm);
+}
+.product-cta:hover { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 2rem 2.5rem; border-top: 1px solid var(--line);
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim);
+}
+
+/* ── Order Modal (same gate-box style) ───────────────────── */
+#order-modal {
+  display: none; position: fixed; inset: 0; z-index: 200;
+}
+#order-modal.on { display: flex; align-items: center; justify-content: center; }
+
+.modal-overlay {
+  position: absolute; inset: 0; background: rgba(12,12,12,0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+.modal-box {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 460px; margin: 1.5rem;
+  background: rgba(240,240,240,0.04);
+  border: 1px solid var(--line); border-radius: 20px;
+  padding: 2.5rem;
+}
+.modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; }
+.modal-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+.modal-x {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 50%;
+  font-size: 16px; color: var(--dim); line-height: 1;
+  transition: border-color var(--dur-sm), color var(--dur-sm);
+}
+.modal-x:hover { border-color: var(--fg); color: var(--fg); }
+.modal-name {
+  font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; text-transform: uppercase;
+  letter-spacing: -0.01em; margin-bottom: 0.5rem; line-height: 1;
+}
+.modal-price { font-size: 13px; color: var(--dim); letter-spacing: 0.06em; margin-bottom: 2rem; }
+
+.size-label {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 0.75rem;
+}
+.size-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.size-btn {
+  padding: 0.5rem 1rem; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--line); border-radius: 8px;
+  transition: border-color var(--dur-sm), background var(--dur-sm), color var(--dur-sm);
+}
+.size-btn.active { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+.size-btn:hover:not(.active) { border-color: rgba(240,240,240,0.4); }
+
+.modal-card-field {
+  padding: 0.9rem 0; border-bottom: 1px solid var(--line); margin-bottom: 0.5rem; min-height: 40px;
+}
+.m-error {
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,80,80,0.9); margin-bottom: 1rem;
+  height: 0; overflow: hidden; transition: height var(--dur-sm);
+}
+.m-error.on { height: 1.2em; }
+
+.modal-submit {
+  width: 100%; padding: 1rem; margin-top: 0.25rem;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid rgba(240,240,240,0.18); border-radius: 12px;
+  background: rgba(240,240,240,0.04);
+  transition: border-color var(--dur-sm), background var(--dur-sm), color var(--dur-sm),
+              transform var(--dur-micro), box-shadow var(--dur-micro);
+}
+.modal-submit:hover:not(:disabled) {
+  border-color: var(--fg); background: var(--fg); color: var(--bg);
+  transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.modal-submit:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
+.modal-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.modal-confirm-headline {
+  font-size: clamp(3rem, 10vw, 5rem); font-weight: 700; line-height: 0.9;
+  letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.modal-confirm-sub {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dim); line-height: 1.8;
+}
+
+/* ── Auth guard overlay ──────────────────────────────────── */
+#auth-guard {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: var(--bg); align-items: center; justify-content: center;
+  flex-direction: column; text-align: center; padding: 2rem;
+}
+#auth-guard.on { display: flex; }
+.guard-headline {
+  font-size: clamp(2rem, 6vw, 4rem); font-weight: 700;
+  text-transform: uppercase; margin-bottom: 1rem; letter-spacing: -0.02em;
+}
+.guard-sub {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 2rem;
+}
+.guard-cta {
+  display: inline-block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 1rem 2rem; border: 1px solid rgba(240,240,240,0.18);
+  border-radius: 12px; text-decoration: none; color: var(--fg);
+  transition: border-color var(--dur-sm), background var(--dur-sm), color var(--dur-sm);
+}
+.guard-cta:hover { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+
+@media (max-width: 640px) {
+  .nav { padding: 1rem 1.25rem; }
+  .page { padding: 5.5rem 1.25rem 3rem; }
+  .product-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+  </style>
+</head>
+<body>
+
+<!-- Auth guard (shown before JWT is verified) -->
+<div id="auth-guard" class="on">
+  <p class="guard-headline">Members<br>Only.</p>
+  <p class="guard-sub">This archive is exclusive to Empty Closet members.</p>
+  <a href="/" class="guard-cta">Back to Empty Closet</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="n-mark">
+    <svg class="ec-logo" fill="currentColor" aria-label="Empty Closet"><use href="#ec-logo"/></svg>
+    <span class="n-label">Archive</span>
+  </div>
+  <div class="n-right">
+    <span class="n-user" id="nav-user"></span>
+    <button class="n-logout" onclick="logout()">Log out</button>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main class="page" id="main-page" style="display:none">
+  <header class="page-header">
+    <div class="page-eyebrow" id="page-eyebrow">Empty Closet &nbsp;·&nbsp; Members Archive</div>
+    <h1 class="page-headline">The<br>Archive.</h1>
+  </header>
+
+  <div id="product-area">
+    <div class="state-loading" id="state-loading">
+      <div class="spinner"></div>
+      Loading releases…
+    </div>
+    <div class="product-grid" id="product-grid" style="display:none"></div>
+    <div class="state-empty" id="state-empty" style="display:none">
+      No releases yet. Check back soon.
+    </div>
+  </div>
+</main>
+
+<footer id="page-footer" style="display:none">
+  <span style="display:flex;align-items:center;gap:0.6rem">
+    <svg class="ec-logo ec-logo-sm" fill="currentColor" aria-label="Empty Closet"><use href="#ec-logo"/></svg>
+    &copy; 2026
+  </span>
+  <span>Independent Fashion System</span>
+</footer>
+
+<!-- Order modal -->
+<div id="order-modal" role="dialog" aria-modal="true">
+  <div class="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <!-- Step: order form -->
+    <div id="modal-step-order">
+      <div class="modal-top">
+        <span class="modal-eyebrow" id="modal-eyebrow">Empty Closet &nbsp;·&nbsp; Archive</span>
+        <button class="modal-x" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+
+      <div class="size-label">Select size</div>
+      <div class="size-grid" id="size-grid"></div>
+
+      <div class="modal-card-field" id="modal-card-element"></div>
+      <div class="m-error" id="modal-card-error"></div>
+      <div class="m-error" id="modal-order-error"></div>
+
+      <button class="modal-submit" id="modal-submit" onclick="submitOrder()">
+        Order &nbsp;·&nbsp; <span id="modal-price-btn"></span>
+      </button>
+    </div>
+
+    <!-- Step: confirmation -->
+    <div id="modal-step-confirm" style="display:none">
+      <div class="modal-confirm-headline">Order<br>Placed.</div>
+      <div class="modal-confirm-sub" id="modal-confirm-sub">
+        Your order is confirmed.<br>
+        Confirmation sent to your email.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const EC_API = 'https://app.yprint.de';
+const STRIPE_PK = 'pk_test_51QomIBRKAsoba9v5x3sh1Tyuk1EvVSFJATggnqR4LvwYeWDlGBX2gPd1575wCR589biL2BPMTwvW0HBxuZjAot3r00EzzSx9Fz';
+
+let token = null;
+let currentUser = null;
+let currentProduct = null;
+let selectedSize = null;
+let stripe = null;
+let modalCard = null;
+let modalCardMounted = false;
+
+/* ── Auth ────────────────────────────────────────────────── */
+async function init() {
+  token = localStorage.getItem('ec_token');
+  if (!token) { showGuard(); return; }
+
+  try {
+    const res = await fetch(EC_API + '/api/ec/me', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    if (!res.ok) { showGuard(); return; }
+    const data = await res.json();
+    currentUser = data.user;
+  } catch {
+    showGuard(); return;
+  }
+
+  document.getElementById('auth-guard').classList.remove('on');
+  document.getElementById('main-page').style.display = '';
+  document.getElementById('page-footer').style.display = '';
+  document.getElementById('nav-user').textContent = currentUser.name || currentUser.email;
+
+  loadProducts();
+}
+
+function showGuard() {
+  document.getElementById('auth-guard').classList.add('on');
+}
+
+function logout() {
+  localStorage.removeItem('ec_token');
+  window.location.href = '/';
+}
+
+/* ── Products ────────────────────────────────────────────── */
+async function loadProducts() {
+  try {
+    const res = await fetch(EC_API + '/api/ec/archive', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    const data = await res.json();
+
+    document.getElementById('state-loading').style.display = 'none';
+
+    if (!res.ok || !data.data?.length) {
+      document.getElementById('state-empty').style.display = '';
+      return;
+    }
+
+    const grid = document.getElementById('product-grid');
+    grid.style.display = '';
+    data.data.forEach(p => grid.appendChild(renderCard(p)));
+  } catch {
+    document.getElementById('state-loading').style.display = 'none';
+    document.getElementById('state-empty').style.display = '';
+  }
+}
+
+function renderCard(product) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.onclick = () => openModal(product);
+
+  const img = product.images?.[0]?.url;
+  const imgHtml = img
+    ? `<img src="${img}" alt="${product.name}" loading="lazy">`
+    : `<div class="product-card-img-placeholder">EC</div>`;
+
+  card.innerHTML = `
+    <div class="product-card-img">${imgHtml}</div>
+    <div class="product-card-body">
+      ${product.release_label ? `<div class="product-release">${product.release_label}</div>` : ''}
+      <div class="product-name">${product.name}</div>
+      <div class="product-footer">
+        <span class="product-price">€${Number(product.price).toFixed(2)}</span>
+        <button class="product-cta">Order</button>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+/* ── Order modal ─────────────────────────────────────────── */
+function initStripe() {
+  if (modalCardMounted) return;
+  stripe = Stripe(STRIPE_PK);
+  const elements = stripe.elements({
+    fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400&display=swap' }]
+  });
+  modalCard = elements.create('card', {
+    style: {
+      base: {
+        color: '#f0f0f0', fontFamily: '"Barlow Condensed", sans-serif',
+        fontSize: '12px', letterSpacing: '0.08em',
+        '::placeholder': { color: 'rgba(240,240,240,0.38)' },
+        iconColor: 'rgba(240,240,240,0.6)',
+      },
+      invalid: { color: 'rgba(255,80,80,0.9)' },
+    },
+  });
+  modalCard.mount('#modal-card-element');
+  modalCard.on('change', e => {
+    const el = document.getElementById('modal-card-error');
+    if (e.error) { el.textContent = e.error.message; el.classList.add('on'); }
+    else { el.textContent = ''; el.classList.remove('on'); }
+  });
+  modalCardMounted = true;
+}
+
+function openModal(product) {
+  currentProduct = product;
+  selectedSize = null;
+
+  document.getElementById('modal-step-order').style.display = '';
+  document.getElementById('modal-step-confirm').style.display = 'none';
+  document.getElementById('modal-name').textContent = product.name;
+  document.getElementById('modal-price').textContent = `€${Number(product.price).toFixed(2)} · Free Shipping`;
+  document.getElementById('modal-price-btn').textContent = `€${Number(product.price).toFixed(2)}`;
+  if (product.release_label) document.getElementById('modal-eyebrow').textContent = product.release_label;
+
+  // Size buttons
+  const grid = document.getElementById('size-grid');
+  grid.innerHTML = '';
+  (product.sizes || []).forEach(sz => {
+    const btn = document.createElement('button');
+    btn.className = 'size-btn';
+    btn.textContent = sz.name || sz.id || sz;
+    btn.onclick = () => {
+      grid.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedSize = sz.name || sz.id || sz;
+    };
+    grid.appendChild(btn);
+  });
+
+  const errEl = document.getElementById('modal-order-error');
+  errEl.textContent = ''; errEl.classList.remove('on');
+
+  const submitBtn = document.getElementById('modal-submit');
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = `Order &nbsp;·&nbsp; €${Number(product.price).toFixed(2)}`;
+
+  document.getElementById('order-modal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  initStripe();
+}
+
+function closeModal() {
+  document.getElementById('order-modal').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+async function submitOrder() {
+  if (!selectedSize && currentProduct?.sizes?.length > 0) {
+    const errEl = document.getElementById('modal-order-error');
+    errEl.textContent = 'Please select a size.';
+    errEl.classList.add('on');
+    return;
+  }
+
+  const btn = document.getElementById('modal-submit');
+  btn.disabled = true;
+  btn.textContent = 'Processing…';
+  const errEl = document.getElementById('modal-order-error');
+  errEl.textContent = ''; errEl.classList.remove('on');
+
+  const { paymentMethod, error: pmErr } = await stripe.createPaymentMethod({ type: 'card', card: modalCard });
+  if (pmErr) {
+    errEl.textContent = pmErr.message; errEl.classList.add('on');
+    btn.disabled = false;
+    btn.innerHTML = `Order &nbsp;·&nbsp; €${Number(currentProduct.price).toFixed(2)}`;
+    return;
+  }
+
+  await doOrder({ product_id: currentProduct.id, size: selectedSize || '', stripe_payment_method_id: paymentMethod.id }, btn, errEl);
+}
+
+async function doOrder(payload, btn, errEl) {
+  try {
+    const res = await fetch(EC_API + '/api/ec/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    if (res.status === 202 && data.action_required) {
+      btn.textContent = 'Confirming…';
+      const { error: actionErr } = await stripe.handleCardAction(data.client_secret);
+      if (actionErr) {
+        errEl.textContent = actionErr.message; errEl.classList.add('on');
+        btn.disabled = false;
+        btn.innerHTML = `Order &nbsp;·&nbsp; €${Number(currentProduct.price).toFixed(2)}`;
+        return;
+      }
+      const { stripe_payment_method_id: _, ...rest } = payload;
+      await doOrder({ ...rest, payment_intent_id: data.payment_intent_id }, btn, errEl);
+      return;
+    }
+
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Something went wrong.'; errEl.classList.add('on');
+      btn.disabled = false;
+      btn.innerHTML = `Order &nbsp;·&nbsp; €${Number(currentProduct.price).toFixed(2)}`;
+      return;
+    }
+
+    document.getElementById('modal-confirm-sub').innerHTML =
+      `Order #${data.order_number} confirmed.<br>Confirmation sent to your email.`;
+    document.getElementById('modal-step-order').style.display = 'none';
+    document.getElementById('modal-step-confirm').style.display = '';
+    setTimeout(closeModal, 3500);
+  } catch {
+    errEl.textContent = 'Network error — please try again.'; errEl.classList.add('on');
+    btn.disabled = false;
+    btn.innerHTML = `Order &nbsp;·&nbsp; €${Number(currentProduct.price).toFixed(2)}`;
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+init();
+</script>
+</body>
+</html>
