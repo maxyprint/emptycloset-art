@@ -456,11 +456,6 @@ footer {
 <script>
 const EC_API = 'https://app.yprint.de';
 
-/* Redirect if already logged in */
-(function() {
-  const t = localStorage.getItem('ec_token');
-  if (t) location.href = '/archive';
-})();
 
 /* ── Waitlist modal ──────────────────────────────────────── */
 function openWaitlist() {
