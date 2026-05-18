@@ -51,6 +51,19 @@ input, button, select, textarea {
 }
 button { cursor: pointer; }
 
+/* ── Admin bar ───────────────────────────────────────────── */
+#admin-bar {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 36px; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--line);
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);
+}
+#admin-bar a { color: var(--fg); text-decoration: none; letter-spacing: 0.1em; font-size: 9px; }
+#admin-bar a:hover { opacity: 0.7; }
+body.admin-visible .nav { top: 36px; }
+body.admin-visible .page { padding-top: calc(var(--nav-h, 72px) + 36px); }
+
 /* ── Nav ─────────────────────────────────────────────────── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -134,6 +147,7 @@ button { cursor: pointer; }
 }
 
 .product-card-body { padding: 1.5rem 1.25rem 1.25rem; }
+.product-designer { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-top: 0.2rem; }
 .product-release {
   font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--dim); margin-bottom: 0.5rem;
@@ -273,6 +287,12 @@ footer {
 </head>
 <body>
 
+<!-- Admin bar -->
+<div id="admin-bar">
+  <span>Admin Mode</span>
+  <a href="https://app.yprint.de/admin/ec">EC Admin →</a>
+</div>
+
 <!-- Auth guard (shown before JWT is verified) -->
 <div id="auth-guard" class="on">
   <p class="guard-headline">Members<br>Only.</p>
@@ -390,6 +410,11 @@ async function init() {
   document.getElementById('page-footer').style.display = '';
   document.getElementById('nav-user').textContent = currentUser.name || currentUser.email;
 
+  if (data.is_admin) {
+    document.getElementById('admin-bar').style.display = 'flex';
+    document.body.classList.add('admin-visible');
+  }
+
   loadProducts();
 }
 
@@ -441,6 +466,7 @@ function renderCard(product) {
     <div class="product-card-body">
       ${product.release_label ? `<div class="product-release">${product.release_label}</div>` : ''}
       <div class="product-name">${product.name}</div>
+      ${product.designer_username ? `<div class="product-designer">by @${product.designer_username}</div>` : ''}
       <div class="product-footer">
         <span class="product-price">€${Number(product.price).toFixed(2)}</span>
         <button class="product-cta">Order</button>

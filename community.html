@@ -28,6 +28,19 @@ input, button, textarea { font-family: inherit; color: inherit; background: none
 button { cursor: pointer; font-weight: 700; }
 a { color: inherit; text-decoration: none; }
 
+/* ── Admin bar ───────────────────────────────────────────── */
+#admin-bar {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 36px; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--line);
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);
+}
+#admin-bar a { color: var(--fg); text-decoration: none; letter-spacing: 0.1em; font-size: 9px; }
+#admin-bar a:hover { opacity: 0.7; }
+body.admin-visible .nav { top: 36px; }
+body.admin-visible .page { padding-top: calc(var(--nav-h, 72px) + 36px); }
+
 /* ── Nav ─────────────────────────────────────────────────── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -141,6 +154,12 @@ a { color: inherit; text-decoration: none; }
 </head>
 <body>
 
+<!-- Admin bar -->
+<div id="admin-bar">
+  <span>Admin Mode</span>
+  <a href="https://app.yprint.de/admin/ec">EC Admin →</a>
+</div>
+
 <div id="auth-guard"></div>
 
 <header class="nav">
@@ -217,13 +236,20 @@ async function init() {
   token = localStorage.getItem('ec_token');
   if (!token) { location.href = '/'; return; }
 
+  let meData;
   try {
     const res = await fetch(EC_API + '/api/ec/me', { headers: { Authorization: 'Bearer ' + token } });
     if (!res.ok) { location.href = '/'; return; }
+    meData = await res.json();
   } catch { location.href = '/'; return; }
 
   document.getElementById('auth-guard').classList.add('off');
   document.getElementById('main-page').style.display = '';
+
+  if (meData?.is_admin) {
+    document.getElementById('admin-bar').style.display = 'flex';
+    document.body.classList.add('admin-visible');
+  }
 
   await Promise.all([loadVotes(), loadDesignerStatus()]);
 }
