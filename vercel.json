@@ -2,6 +2,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/archive", "destination": "/archive.html" }
+    { "source": "/join",      "destination": "/index.html" },
+    { "source": "/archive",   "destination": "/archive.html" },
+    { "source": "/community", "destination": "/community.html" },
+    { "source": "/settings",  "destination": "/settings.html" }
   ]
 }

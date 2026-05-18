@@ -427,7 +427,10 @@ footer {
 <!-- Nav -->
 <header class="nav">
   <svg class="ec-logo" fill="currentColor" role="img" aria-label="Empty Closet"><use href="#ec-logo"/></svg>
-  <button class="n-cta" onclick="startPre()">Preorder — €189</button>
+  <div style="display:flex;align-items:center;gap:0.75rem">
+    <a href="/#waitlist" style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(240,240,240,0.38);font-weight:400;font-family:inherit">Waitlist</a>
+    <button class="n-cta" onclick="startPre()">Preorder — €189</button>
+  </div>
 </header>
 
 <!-- Hero: video + text -->
@@ -537,6 +540,9 @@ footer {
         <button class="s-submit" id="code-submit" onclick="verifyCode()">
           Verify Code
         </button>
+        <p style="margin-top:1.25rem;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:rgba(240,240,240,0.32);font-weight:400">
+          No code? <a href="/#waitlist" style="color:rgba(240,240,240,0.6);text-underline-offset:3px;text-decoration:underline">Join the waitlist →</a>
+        </p>
       </div>
 
       <!-- STEP 2 — Registration ───────────────────────────── -->
@@ -590,6 +596,9 @@ footer {
 
 <script>
 /* ── Config ──────────────────────────────────────────────── */
+/* Redirect already-logged-in members straight to the archive */
+if (localStorage.getItem('ec_token')) location.href = '/archive';
+
 const EC_API = 'https://app.yprint.de';
 const STRIPE_PK = 'pk_test_51QomIBRKAsoba9v5x3sh1Tyuk1EvVSFJATggnqR4LvwYeWDlGBX2gPd1575wCR589biL2BPMTwvW0HBxuZjAot3r00EzzSx9Fz';
 
