@@ -377,7 +377,7 @@ footer {
 <div id="waitlist-gate">
   <div class="waitlist-box">
     <div class="waitlist-modal-header">
-      <h2 class="waitlist-modal-headline">Join<br>The List.</h2>
+      <h2 class="waitlist-modal-headline" id="wl-headline">Join<br>The List.</h2>
       <button class="waitlist-close" onclick="closeWaitlist()" aria-label="Close"></button>
     </div>
     <div id="waitlist-form">
@@ -521,6 +521,7 @@ async function submitWaitlist() {
 
     document.getElementById('waitlist-form').style.display = 'none';
     document.getElementById('wl-confirm').classList.add('on');
+    document.getElementById('wl-headline').innerHTML = "You'll Be<br>Notified.";
   } catch {
     errEl.textContent = 'Connection error. Try again.'; errEl.classList.add('on');
     btn.disabled = false; btn.textContent = 'Request Access';
